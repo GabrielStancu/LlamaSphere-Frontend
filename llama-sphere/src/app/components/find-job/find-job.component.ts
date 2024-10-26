@@ -10,7 +10,7 @@ import { UploadService } from 'src/app/services/upload.service';
 export class FindJobComponent {
   // Existing properties and methods
   allJobs: any[] = [];
-  displayedColumns: string[] = ['title', 'score', 'explanation'];
+  displayedColumns: string[] = ['job_name', 'score'];
   loadingJobs: boolean = false;
   errorLoadingJobs: string = '';
   currentCvId: string = '';

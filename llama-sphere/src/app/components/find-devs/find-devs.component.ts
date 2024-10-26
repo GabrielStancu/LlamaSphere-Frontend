@@ -19,7 +19,7 @@ export class FindDevsComponent {
 matchedDevs: any[] = [];
 availableJobs: { id: string, title: string }[] = [];
 selectedJob: string | null = null;
-displayedColumns: string[] = ['name', 'score', 'explanation', 'actions'];
+displayedColumns: string[] = ['candidate_name', 'score', 'general_reasoning'];
 loadingJobs: boolean = false;
 errorLoadingJobs: string = '';
 filterCriteria: string = '';

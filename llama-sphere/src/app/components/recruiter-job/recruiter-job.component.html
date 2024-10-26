@@ -72,10 +72,18 @@
           <td mat-cell *matCellDef="let job"> {{ job.score }} </td>
       </ng-container>
   
-      <!-- Explanation Column -->
-      <ng-container matColumnDef="explanation">
-          <th mat-header-cell *matHeaderCellDef> Explanation </th>
-          <td mat-cell *matCellDef="let job"> {{ job.explanation }} </td>
+      <!-- Explanation Columns -->
+      <ng-container matColumnDef="domain_score">
+          <th mat-header-cell *matHeaderCellDef> Domain Score </th>
+          <td mat-cell *matCellDef="let job"> {{ job.domain_score }} </td>
+      </ng-container>
+      <ng-container matColumnDef="general_score">
+        <th mat-header-cell *matHeaderCellDef> General Score </th>
+        <td mat-cell *matCellDef="let job"> {{ job.general_score }} </td>
+      </ng-container>
+      <ng-container matColumnDef="tehnical_score">
+        <th mat-header-cell *matHeaderCellDef> Tehnical Score </th>
+        <td mat-cell *matCellDef="let job"> {{ job.tehnical_score }} </td>
       </ng-container>
   
       <!-- Header and Row Declarations -->

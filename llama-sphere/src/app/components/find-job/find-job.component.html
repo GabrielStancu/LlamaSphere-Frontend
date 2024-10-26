@@ -70,7 +70,7 @@
         <!-- Job Title Column -->
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef> Job Title </th>
-            <td mat-cell *matCellDef="let job"> {{ job.title }} </td>
+            <td mat-cell *matCellDef="let job"> {{ job.job_name }} </td>
         </ng-container>
 
         <!-- Score Column -->
@@ -80,10 +80,10 @@
         </ng-container>
 
         <!-- Explanation Column -->
-        <ng-container matColumnDef="explanation">
+        <!-- <ng-container matColumnDef="explanation">
             <th mat-header-cell *matHeaderCellDef> Explanation </th>
             <td mat-cell *matCellDef="let job"> {{ job.explanation }} </td>
-        </ng-container>
+        </ng-container> -->
 
         <!-- Header and Row Declarations -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
