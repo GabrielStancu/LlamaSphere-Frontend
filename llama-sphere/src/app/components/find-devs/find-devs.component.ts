@@ -129,11 +129,17 @@ sendQuestion(): void {
   }
 
   sendAcceptEmail(dev: any): void {
+    const requestData = {
+      reasoning_1: dev.general_reasoning,
+      reasoning_2: dev.tehnical_reasoning,
+      reasoning_3: dev.domain_reasoning,
+      accepted: true
+    };
     // Fetch initial response text for "Accept" email from backend
-    this.matchingService.getAcceptEmailTemplate(dev.id).subscribe((response: string) => {
+    this.matchingService.getEmailTemplate(requestData).subscribe((response: string) => {
       const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
         width: '400px',
-        data: { message: response, action: 'Accept' }
+        data: { reasoning: response}
       });
 
       dialogRef.afterClosed().subscribe((editedMessage: string) => {
@@ -147,8 +153,14 @@ sendQuestion(): void {
   }
 
   sendRejectEmail(dev: any): void {
+    const requestData = {
+      reasoning_1: dev.general_reasoning,
+      reasoning_2: dev.tehnical_reasoning,
+      reasoning_3: dev.domain_reasoning,
+      accepted: false
+    };
     // Fetch initial response text for "Reject" email from backend
-    this.matchingService.getRejectEmailTemplate(dev.id).subscribe((response: string) => {
+    this.matchingService.getEmailTemplate(requestData).subscribe((response: string) => {
       const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
         width: '400px',
         data: { message: response, action: 'Reject' }

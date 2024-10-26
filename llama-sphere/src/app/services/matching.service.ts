@@ -9,6 +9,7 @@ export class MatchingService {
 
   private apiUrl = 'https://localhost:7037/api';
   private faqUrl = 'http://127.0.0.1:8000';
+  private reasoningUrl = 'http://192.168.1.7:5000';
 
   constructor(private http: HttpClient) { }
 
@@ -125,15 +126,9 @@ export class MatchingService {
     return of('send email response');
   }
 
-  getAcceptEmailTemplate(data: any): Observable<any> {
-    // const url = `${this.faqUrl}/get-accept-email-template`;
-    // return this.http.post<any>(url, { data });
-    return of('Email text for accepting the candidate.');
-  }
-
-  getRejectEmailTemplate(data: any): Observable<any> {
-    // const url = `${this.faqUrl}/get-reject-email-template`;
-    // return this.http.post<any>(url, { data });
-    return of('Email text for rejecting the candidate.');
+  getEmailTemplate(data: any): Observable<any> {
+    const url = `${this.reasoningUrl}/reasoning`;
+    return this.http.post<any>(url, { data });
+    // return of('Email text for accepting the candidate.');
   }
 }
