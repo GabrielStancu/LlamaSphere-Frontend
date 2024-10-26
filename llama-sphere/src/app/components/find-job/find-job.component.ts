@@ -65,7 +65,7 @@ export class FindJobComponent {
     this.allJobs = [];
 
     const requestData = {
-      CvId: '1',
+      CvId: this.currentCvId,
     };
 
     this.matchingService.getMatchedJobs(requestData).subscribe(

@@ -82,7 +82,7 @@ sendQuestion(): void {
   onGetMatchedDevs(): void {
     if (this.selectedJob) {
       const requestData = {
-          ProjectId: this.selectedJob,
+          ProjectId: this.currentJobId,
           Keywords: this.constructKeywordsObject()
       };
 
