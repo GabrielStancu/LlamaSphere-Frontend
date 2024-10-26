@@ -52,6 +52,7 @@ export class RecruiterJobComponent {
       this.matchingService.sendFaqQuestion(this.userQuestion).subscribe(
         (response) => {
           // Add the bot's response to the chat
+          debugger;
           this.chatMessages.push({ sender: 'bot', message: response.answer });
         },
         (error) => {

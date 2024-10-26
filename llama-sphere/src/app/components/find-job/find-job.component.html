@@ -11,38 +11,39 @@
 
     <!-- FAQ Button and Chat Window -->
     <div class="faq-chat-container">
-      <!-- The FAQ Button -->
-      <button class="faq-button" (mouseenter)="showChat()" (mouseleave)="scheduleHideChat()">
-        <!-- You can use an icon or text -->
-        <img src="assets/faq-icon.svg" alt="FAQ">
-      </button>
+        <!-- The FAQ Button -->
+        <button class="faq-button" (mouseenter)="showChat()" (mouseleave)="scheduleHideChat()">
+            <!-- You can use an icon or text -->
+            <img src="assets/faq-icon.svg" alt="FAQ">
+        </button>
+    
+        <!-- The Chat Window -->
+        <div
+            class="chat-window"
+            [class.visible]="isChatVisible"
+            (mouseenter)="showChat()"
+            (mouseleave)="scheduleHideChat()"
+        >
+            <div class="chat-header">
+            <h3>FAQ Chat</h3>
+            </div>
+            <div class="chat-body">
+            <div *ngFor="let msg of chatMessages" [ngClass]="{'user-message': msg.sender === 'user', 'bot-message': msg.sender === 'bot'}">
+                <p>{{ msg.message }}</p>
+            </div>
+            </div>
+            <div class="chat-footer">
+            <input
+                type="text"
+                [(ngModel)]="userQuestion"
+                placeholder="Type your question..."
+                (keydown.enter)="sendQuestion()"
+            >
+            <button (click)="sendQuestion()">Send</button>
+            </div>
+        </div>
+        </div>
 
-      <!-- The Chat Window -->
-      <div
-        class="chat-window"
-        [class.visible]="isChatVisible"
-        (mouseenter)="showChat()"
-        (mouseleave)="scheduleHideChat()"
-      >
-        <div class="chat-header">
-          <h3>FAQ Chat</h3>
-        </div>
-        <div class="chat-body">
-          <div *ngFor="let msg of chatMessages" [ngClass]="{'user-message': msg.sender === 'user', 'bot-message': msg.sender === 'bot'}">
-            <p>{{ msg.message }}</p>
-          </div>
-        </div>
-        <div class="chat-footer">
-          <input
-            type="text"
-            [(ngModel)]="userQuestion"
-            placeholder="Type your question..."
-            (keydown.enter)="sendQuestion()"
-          >
-          <button (click)="sendQuestion()">Send</button>
-        </div>
-      </div>
-    </div>
 
     <!-- Button to get matching jobs -->
     <button mat-raised-button color="primary" class="matching-jobs-button" (click)="onGetAllJobs()">
