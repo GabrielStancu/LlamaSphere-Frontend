@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatchingService } from 'src/app/services/matching.service';
 import { AppAcceptRejectDialogComponent } from '../app-accept-reject-dialog/app-accept-reject-dialog.component';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-find-devs',
@@ -25,7 +26,7 @@ chatMessages: { sender: string, message: string }[] = [];
 hideChatTimeout: any;
 selectedJobTitle: string = 'Select Job';
 
-constructor(private dialog: MatDialog, private matchingService: MatchingService) { }
+constructor(private dialog: MatDialog, private matchingService: MatchingService, private uploadService : UploadService) { }
 
 ngOnInit(): void {
   // Initialization logic
@@ -79,7 +80,7 @@ sendQuestion(): void {
         jobId: this.selectedJob,
         filter: this.filterCriteria // Add filter criteria to request
       };
-      
+
       // Make a request using MatchingService with jobId and filterCriteria
       this.matchingService.getMatchedCandidates(requestData).subscribe(
         (candidates) => {
@@ -147,4 +148,9 @@ sendQuestion(): void {
     });
   }
 
+  public receiveFile(file: File) {
+    this.uploadService.uploadJob(file).subscribe(result =>
+      alert("File Uploaded!")
+    );
+  }
 }
