@@ -77,11 +77,11 @@ sendQuestion(): void {
   }
 }
 
-  onGetMatchedJobs(): void {
+  onGetMatchedDevs(): void {
     if (this.selectedJob) {
       const requestData = {
-        jobId: this.selectedJob,
-        filterWeights: this.filterWeights
+          ProjectId: this.selectedJob,
+          Keywords: this.constructKeywordsObject()
       };
 
       // Make a request using MatchingService with jobId and filterCriteria
@@ -97,6 +97,16 @@ sendQuestion(): void {
     } else {
       alert('Please select a job to find matching candidates.');
     }
+  }
+  
+  private constructKeywordsObject(): { [key: string]: number } {
+    const keywords: { [key: string]: number } = {};
+  
+    this.filterWeights.forEach(pair => {
+      keywords[pair.filter] = pair.weight || 0; // Assign weight or default to 0
+    });
+  
+    return keywords;
   }
 
   fetchAvailableJobs(): void {

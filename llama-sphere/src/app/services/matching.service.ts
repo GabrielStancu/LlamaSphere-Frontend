@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class MatchingService {
 
-  private apiUrl = 'http://your-backend-api.com/api/matching-jobs';
+  private apiUrl = 'https://localhost:7037/api';
   private faqUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) { }
@@ -65,30 +65,30 @@ export class MatchingService {
   }
 
   getMatchedJobs(data: any): Observable<any> {
-    // return this.http.post(`${this.apiUrl}/match-jobs`, data);
-    const jobs = [
-      {
-        id: '1',
-        title: 'Senior Software Engineer1',
-        score: 95,
-        explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
-      },
-      {
-        id: '2',
-        title: 'Full Stack Developer1',
-        score: 88,
-        explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
-      },
-      {
-        id: '3',
-        title: 'Backend Developer1',
-        score: 80,
-        explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
-      }
-    ];
+    return this.http.post(`${this.apiUrl}/Cvs`, data);
+    // const jobs = [
+    //   {
+    //     id: '1',
+    //     title: 'Senior Software Engineer1',
+    //     score: 95,
+    //     explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
+    //   },
+    //   {
+    //     id: '2',
+    //     title: 'Full Stack Developer1',
+    //     score: 88,
+    //     explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
+    //   },
+    //   {
+    //     id: '3',
+    //     title: 'Backend Developer1',
+    //     score: 80,
+    //     explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
+    //   }
+    // ];
 
     // Return the jobs as an Observable
-    return of(jobs);
+    // return of(jobs);
   }
 
   getMatchedCandidates(data: any): Observable<any> {
