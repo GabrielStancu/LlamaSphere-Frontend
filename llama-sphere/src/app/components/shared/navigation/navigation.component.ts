@@ -47,7 +47,7 @@ export class NavigationComponent {
       new SidebarOption('NVision', 'logo-apple', '/developer'),
       new SidebarOption('Dashboard', 'home', '/developer', false, true),
       new SidebarOption('Account', 'person', '/'),
-      new SidebarOption('Jobs', 'business_center', '/find-jobs'),
+      new SidebarOption('Matchings', 'business_center', '/find-jobs'),
       new SidebarOption('Log Out', 'power_off', '/login', true)
     ];
   }
@@ -57,7 +57,7 @@ export class NavigationComponent {
       new SidebarOption('NVision', 'logo-apple', '/recruiter'),
       new SidebarOption('Dashboard', 'home', '/recruiter', false, true),
       new SidebarOption('Account', 'person', '/'),
-      new SidebarOption('Appliants', 'business_center', '/find-devs'),
+      new SidebarOption('Matchings', 'business_center', '/find-devs'),
       new SidebarOption('Log Out', 'power_off', '/login', true)
     ];
   }
