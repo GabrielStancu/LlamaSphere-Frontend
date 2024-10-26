@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { MatchingService } from 'src/app/services/matching.service';
 
 @Component({
-  selector: 'app-recruiter-job',
-  templateUrl: './recruiter-job.component.html',
-  styleUrls: ['./recruiter-job.component.css']
+  selector: 'app-find-job',
+  templateUrl: './find-job.component.html',
+  styleUrls: ['./find-job.component.css']
 })
-export class RecruiterJobComponent {
+export class FindJobComponent {
   // Existing properties and methods
   allJobs: any[] = [];
   displayedColumns: string[] = ['title', 'score', 'explanation'];

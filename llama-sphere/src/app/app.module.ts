@@ -27,6 +27,8 @@ import { TopbarComponent } from './components/shared/topbar/topbar.component';
 import { MatchingService } from './services/matching.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
+import { FindJobComponent } from './components/find-job/find-job.component';
+import { FindDevsComponent } from './components/find-devs/find-devs.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { MatTableModule } from '@angular/material/table';
     DeveloperCvComponent,
     RecruiterJobComponent,
     NavigationComponent,
-    TopbarComponent
+    TopbarComponent,
+    FindJobComponent,
+    FindDevsComponent
   ],
   imports: [
     BrowserModule,

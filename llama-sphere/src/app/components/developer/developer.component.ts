@@ -23,6 +23,7 @@ export class DeveloperComponent {
   
     ngOnInit(): void {
       // Initialization logic
+      this.onGetAllJobs();
     }
   
     // Existing methods

@@ -38,26 +38,10 @@
       </div>
     </div>
 
-    <!-- Button to get matching jobs -->
-    <button mat-raised-button color="primary" class="matching-jobs-button" (click)="onGetAllJobs()">
-        Find Matching Jobs
-    </button>
-
-    <!-- Loading Indicator -->
-    <div *ngIf="loadingJobs" class="loading-indicator">
-        <p>Loading matching jobs...</p>
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Error Message -->
-    <div *ngIf="errorLoadingJobs" class="error-message">
-        <p>{{ errorLoadingJobs }}</p>
-    </div>
-
-      
+    
     <!-- Display the jobs in a table -->
     <div *ngIf="allJobs && allJobs.length > 0" class="jobs-table-container">
-        <h3>Your Matching Jobs:</h3>
+        <h3>Check All the Available Jobs:</h3>
         <table mat-table [dataSource]="allJobs" class="mat-elevation-z8">
     
         <!-- Job Title Column -->

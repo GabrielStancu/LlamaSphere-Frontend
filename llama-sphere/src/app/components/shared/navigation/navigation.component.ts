@@ -44,20 +44,20 @@ export class NavigationComponent {
 
   private initDeveloperSidebarMenu(): void {
     this.sidebarOptions = [
-      new SidebarOption('NVision', 'logo-apple', '/watcher'),
-      new SidebarOption('Dashboard', 'home', '/watcher', false, true),
+      new SidebarOption('NVision', 'logo-apple', '/developer'),
+      new SidebarOption('Dashboard', 'home', '/developer', false, true),
       new SidebarOption('Account', 'person', '/watcher-account'),
-      new SidebarOption('Jobs', 'business_center', '/watcher-subjects'),
+      new SidebarOption('Jobs', 'business_center', '/find-jobs'),
       new SidebarOption('Log Out', 'power_off', '/login', true)
     ];
   }
 
   private initRecruiterSidebarMenu(): void {
     this.sidebarOptions = [
-      new SidebarOption('NVision', 'logo-apple', '/watcher'),
-      new SidebarOption('Dashboard', 'home', '/watcher', false, true),
+      new SidebarOption('NVision', 'logo-apple', '/recruiter'),
+      new SidebarOption('Dashboard', 'home', '/recruiter', false, true),
       new SidebarOption('Account', 'person', '/watcher-account'),
-      new SidebarOption('Appliants', 'business_center', '/watcher-subjects'),
+      new SidebarOption('Appliants', 'business_center', '/find-devs'),
       new SidebarOption('Log Out', 'power_off', '/login', true)
     ];
   }
