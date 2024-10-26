@@ -65,7 +65,7 @@ export class MatchingService {
   }
 
   getMatchedJobs(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/Cvs`, data);
+    return this.http.post(`${this.apiUrl}/Jobs`, data);
     // const jobs = [
     //   {
     //     id: '1',
@@ -92,26 +92,26 @@ export class MatchingService {
   }
 
   getMatchedCandidates(data: any): Observable<any> {
-    // return this.http.post(`${this.apiUrl}/match-candidates`, data);
-    const candidates = [
-      {
-        name: 'Vulsan Bianca',
-        score: 95,
-        explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
-      },
-      {
-        name: 'Muscalagiu Anca',
-        score: 88,
-        explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
-      },
-      {
-        name: 'Toma Maria',
-        score: 80,
-        explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
-      }
-    ];
+    return this.http.post(`${this.apiUrl}/Cvs`, data);
+    // const candidates = [
+    //   {
+    //     name: 'Vulsan Bianca',
+    //     score: 95,
+    //     explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
+    //   },
+    //   {
+    //     name: 'Muscalagiu Anca',
+    //     score: 88,
+    //     explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
+    //   },
+    //   {
+    //     name: 'Toma Maria',
+    //     score: 80,
+    //     explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
+    //   }
+    // ];
 
-    return of(candidates);
+    // return of(candidates);
   }
 
   sendFaqQuestion(user_question: string): Observable<any> {
