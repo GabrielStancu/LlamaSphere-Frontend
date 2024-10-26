@@ -257,3 +257,28 @@
 .job-dropdown {
     width: 250px; /* Set dropdown width */
 }
+
+
+/* Styles for Action Buttons */
+.accept-button {
+    background-color: #4CAF50; /* Green color for accept */
+    color: white;
+    font-weight: bold;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.accept-button:hover {
+    background-color: #45A049; /* Darker green on hover */
+}
+
+.reject-button {
+    background-color: #F44336; /* Red color for reject */
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.reject-button:hover {
+    background-color: #D32F2F; /* Darker red on hover */
+}

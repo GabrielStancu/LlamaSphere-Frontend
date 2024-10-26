@@ -11,7 +11,7 @@ export class FindDevsComponent {
 matchedDevs: any[] = [];
 availableJobs: { id: string, title: string }[] = [];
 selectedJob: string | null = null;
-displayedColumns: string[] = ['name', 'score', 'explanation'];
+displayedColumns: string[] = ['name', 'score', 'explanation', 'actions'];
 loadingJobs: boolean = false;
 errorLoadingJobs: string = '';
 
@@ -102,5 +102,17 @@ sendQuestion(): void {
     // Find the selected job title based on the selected job ID
     const selectedJob = this.availableJobs.find(job => job.id === jobId);
     this.selectedJobTitle = selectedJob ? selectedJob.title : 'Select Job';
+  }
+
+  sendAcceptEmail(dev: any): void {
+    // Send accept email logic here
+    console.log(`Accept email sent to ${dev.name}`);
+    // Add actual request code here, e.g., call a service method
+  }
+
+  sendRejectEmail(dev: any): void {
+    // Send reject email logic here
+    console.log(`Reject email sent to ${dev.name}`);
+    // Add actual request code here, e.g., call a service method
   }
 }
