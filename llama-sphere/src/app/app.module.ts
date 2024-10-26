@@ -21,6 +21,8 @@ import { FileUploadComponent } from './components/shared/file-upload/file-upload
 import { ProgressComponent } from './components/shared/progress/progress.component';
 import { DeveloperCvComponent } from './components/developer-cv/developer-cv.component';
 import { RecruiterJobComponent } from './components/recruiter-job/recruiter-job.component';
+import { MatchingService } from './services/matching.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { RecruiterJobComponent } from './components/recruiter-job/recruiter-job.
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     MatDatepickerModule,
     MatFormFieldModule,
@@ -48,7 +51,7 @@ import { RecruiterJobComponent } from './components/recruiter-job/recruiter-job.
     MatNativeDateModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [MatchingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
