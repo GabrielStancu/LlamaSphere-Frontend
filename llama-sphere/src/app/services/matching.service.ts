@@ -13,7 +13,7 @@ export class MatchingService {
   constructor(private http: HttpClient) { }
 
   getAllJobs(): Observable<any[]> {
-    // const url = `${this.apiUrl}/developer/matching-jobs`;
+    // const url = `${this.apiUrl}/developer/all-jobs`;
     // return this.http.get<any[]>(url);
     // Hardcoded job data
     const jobs = [
@@ -41,10 +41,8 @@ export class MatchingService {
     return of(jobs);
   }
 
-  getMatchedJobs() {
-    // const url = `${this.apiUrl}/developer/matching-jobs`;
-    // return this.http.get<any[]>(url);
-    // Hardcoded job data
+  getMatchedJobs(data: any): Observable<any> {
+    // return this.http.post(`${this.apiUrl}/match-jobs`, data);
     const jobs = [
       {
         id: '1',
@@ -70,7 +68,8 @@ export class MatchingService {
     return of(jobs);
   }
 
-  getMatchedCandidates(selectedJob: any) {
+  getMatchedCandidates(data: any): Observable<any> {
+    // return this.http.post(`${this.apiUrl}/match-candidates`, data);
     const candidates = [
       {
         name: 'Vulsan Bianca',
@@ -97,15 +96,21 @@ export class MatchingService {
     return this.http.post<any>(url, { user_question });
   }
 
-  sendEmail(id: any, editedMessage: string) {
+  sendEmail(data: any): Observable<any> {
+    // const url = `${this.faqUrl}/send-email`;
+    // return this.http.post<any>(url, { data });
     return of('send email response');
   }
 
-  getAcceptEmailTemplate(id: any) {
+  getAcceptEmailTemplate(data: any): Observable<any> {
+    // const url = `${this.faqUrl}/get-accept-email-template`;
+    // return this.http.post<any>(url, { data });
     return of('Email text for accepting the candidate.');
   }
 
-  getRejectEmailTemplate(id: any) {
+  getRejectEmailTemplate(data: any): Observable<any> {
+    // const url = `${this.faqUrl}/get-reject-email-template`;
+    // return this.http.post<any>(url, { data });
     return of('Email text for rejecting the candidate.');
   }
 }
