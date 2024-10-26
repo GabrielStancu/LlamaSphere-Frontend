@@ -41,6 +41,29 @@ export class MatchingService {
     return of(jobs);
   }
 
+  getAllDevelopers(): Observable<any> {
+    // return this.http.get(`${this.apiUrl}/developers`);
+    const candidates = [
+      {
+        name: 'Vulsan Bianca',
+        score: 95,
+        explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
+      },
+      {
+        name: 'Muscalagiu Anca',
+        score: 88,
+        explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
+      },
+      {
+        name: 'Toma Maria',
+        score: 80,
+        explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
+      }
+    ];
+
+    return of(candidates);
+  }
+
   getMatchedJobs(data: any): Observable<any> {
     // return this.http.post(`${this.apiUrl}/match-jobs`, data);
     const jobs = [

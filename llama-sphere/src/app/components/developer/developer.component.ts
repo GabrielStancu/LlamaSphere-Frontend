@@ -9,7 +9,7 @@ import { MatchingService } from 'src/app/services/matching.service';
 export class DeveloperComponent {
     // Existing properties and methods
     allJobs: any[] = [];
-    displayedColumns: string[] = ['title', 'score', 'explanation'];
+    displayedColumns: string[] = ['title'];
     loadingJobs: boolean = false;
     errorLoadingJobs: string = '';
 

@@ -152,6 +152,7 @@
   
   mat-header-cell {
     font-weight: bold;
+    color: red;
   }
   
   .error-message p {
