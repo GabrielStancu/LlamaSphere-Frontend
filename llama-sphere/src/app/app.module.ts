@@ -23,6 +23,7 @@ import { DeveloperCvComponent } from './components/developer-cv/developer-cv.com
 import { RecruiterJobComponent } from './components/recruiter-job/recruiter-job.component';
 import { MatchingService } from './services/matching.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatTableModule,
 
     MatDatepickerModule,
     MatFormFieldModule,

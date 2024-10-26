@@ -123,3 +123,40 @@
     background-color: #0056b3;
   }
   
+  .dashboard-container {
+    margin: 20px;
+  }
+  
+  button {
+    margin-bottom: 20px;
+  }
+  
+  .loading-indicator,
+  .error-message {
+    margin-top: 20px;
+    color: red;
+  }
+  
+  .jobs-table-container {
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  mat-header-cell, mat-cell {
+    padding: 8px;
+  }
+  
+  mat-header-cell {
+    font-weight: bold;
+  }
+  
+  .error-message p {
+    color: red;
+  }
+  
+  .loading-indicator p {
+    color: blue;
+  }  

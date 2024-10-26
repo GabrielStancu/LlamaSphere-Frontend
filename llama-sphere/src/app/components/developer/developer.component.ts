@@ -8,7 +8,10 @@ import { MatchingService } from 'src/app/services/matching.service';
 })
 export class DeveloperComponent {
     // Existing properties and methods
-    matchingJobs: any[] = [];
+    allJobs: any[] = [];
+    displayedColumns: string[] = ['title', 'score', 'explanation'];
+    loadingJobs: boolean = false;
+    errorLoadingJobs: string = '';
 
     // Properties for the FAQ Chat
     isChatVisible: boolean = false;
@@ -61,5 +64,24 @@ export class DeveloperComponent {
         // Clear the input field after sending
         this.userQuestion = '';
       }
+    }
+
+    onGetAllJobs(): void {
+      this.loadingJobs = true;
+      this.errorLoadingJobs = '';
+      this.allJobs = [];
+  
+      this.matchingService.getAllJobs().subscribe(
+        (jobs) => {
+          this.allJobs = jobs;
+          this.loadingJobs = false;
+          console.log('Matching jobs:', this.allJobs);
+        },
+        (error) => {
+          console.error('Error fetching matching jobs:', error);
+          this.errorLoadingJobs = 'An error occurred while fetching matching jobs.';
+          this.loadingJobs = false;
+        }
+      );
     }
 }
