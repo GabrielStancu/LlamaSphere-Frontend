@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatchingService } from 'src/app/services/matching.service';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-find-job',
@@ -19,7 +20,7 @@ export class FindJobComponent {
   chatMessages: { sender: string, message: string }[] = [];
   hideChatTimeout: any;
 
-  constructor(private matchingService: MatchingService) { }
+  constructor(private matchingService: MatchingService, private uploadService: UploadService) { }
 
   ngOnInit(): void {
     // Initialization logic
@@ -82,6 +83,12 @@ export class FindJobComponent {
         this.errorLoadingJobs = 'An error occurred while fetching matching jobs.';
         this.loadingJobs = false;
       }
+    );
+  }
+
+  public receiveFile(file: File) {
+    this.uploadService.uploadJob(file).subscribe(result =>
+      alert("File Uploaded!")
     );
   }
 }

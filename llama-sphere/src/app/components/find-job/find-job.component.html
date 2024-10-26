@@ -2,10 +2,10 @@
     <!-- Existing content of your dashboard -->
     <h2 class="dashboard-heading">Welcome to Your Dashboard</h2>
     <!-- Other dashboard elements -->
-  
+
 
     <div class="container">
-        <app-file-upload></app-file-upload>
+        <app-file-upload (fileEmitter)="receiveFile($event)"></app-file-upload>
     </div>
 
 
@@ -16,7 +16,7 @@
         <!-- You can use an icon or text -->
         <img src="assets/faq-icon.svg" alt="FAQ">
       </button>
-  
+
       <!-- The Chat Window -->
       <div
         class="chat-window"
@@ -60,42 +60,41 @@
         <p>{{ errorLoadingJobs }}</p>
     </div>
 
-      
+
     <!-- Display the jobs in a table -->
     <div *ngIf="allJobs && allJobs.length > 0" class="jobs-table-container">
         <h3>Your Matching Jobs:</h3>
         <table mat-table [dataSource]="allJobs" class="mat-elevation-z8">
-    
+
         <!-- Job Title Column -->
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef> Job Title </th>
             <td mat-cell *matCellDef="let job"> {{ job.title }} </td>
         </ng-container>
-    
+
         <!-- Score Column -->
         <ng-container matColumnDef="score">
             <th mat-header-cell *matHeaderCellDef> Match Score (%) </th>
             <td mat-cell *matCellDef="let job"> {{ job.score }} </td>
         </ng-container>
-    
+
         <!-- Explanation Column -->
         <ng-container matColumnDef="explanation">
             <th mat-header-cell *matHeaderCellDef> Explanation </th>
             <td mat-cell *matCellDef="let job"> {{ job.explanation }} </td>
         </ng-container>
-    
+
         <!-- Header and Row Declarations -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
+
         </table>
     </div>
-      
+
     <!-- Message if no jobs are found -->
     <!-- <div *ngIf="allJobs && allJobs.length === 0 && !loadingJobs">
         <p>No matching jobs found at this time.</p>
     </div> -->
-      
+
 
   </div>
-  

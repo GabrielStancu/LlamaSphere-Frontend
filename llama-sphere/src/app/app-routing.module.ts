@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'developer', component: DeveloperComponent },
   { path: 'cv-upload', component: DeveloperCvComponent },
   { path: 'job-upload', component: RecruiterJobComponent },
+  { path: 'developer-cv', component: DeveloperCvComponent },
   { path: '', component: LoginComponent }
 ];
 

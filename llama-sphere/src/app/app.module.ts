@@ -31,6 +31,7 @@ import { FindJobComponent } from './components/find-job/find-job.component';
 import { FindDevsComponent } from './components/find-devs/find-devs.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppAcceptRejectDialogComponent } from './components/app-accept-reject-dialog/app-accept-reject-dialog.component';
+import { UploadService } from './services/upload.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { AppAcceptRejectDialogComponent } from './components/app-accept-reject-d
     MatInputModule,
     MatIconModule
   ],
-  providers: [MatchingService],
+  providers: [MatchingService, UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

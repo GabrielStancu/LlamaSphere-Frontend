@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-file-upload',
@@ -8,6 +8,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 export class FileUploadComponent {
   @ViewChild("fileDropRef", { static: false }) fileDropEl: ElementRef | undefined;
   files: any[] = [];
+  @Output() fileEmitter = new EventEmitter<File>();
 
   /**
    * on file drop handler
@@ -46,6 +47,7 @@ export class FileUploadComponent {
         const progressInterval = setInterval(() => {
           if (this.files[index].progress === 100) {
             clearInterval(progressInterval);
+            this.fileEmitter.emit(this.files[index]);
             this.uploadFilesSimulator(index + 1);
           } else {
             this.files[index].progress += 5;
