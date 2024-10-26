@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 export class MatchingService {
 
   private apiUrl = 'http://your-backend-api.com/api/matching-jobs';
+  private faqUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) { }
 
@@ -91,9 +92,9 @@ export class MatchingService {
     return of(candidates);
   }
 
-  sendFaqQuestion(question: string): Observable<any> {
-    const url = `${this.apiUrl}/faq`;
-    return this.http.post<any>(url, { question });
+  sendFaqQuestion(user_question: string): Observable<any> {
+    const url = `${this.faqUrl}/ask-question`;
+    return this.http.post<any>(url, { user_question });
   }
 
   sendEmail(id: any, editedMessage: string) {
