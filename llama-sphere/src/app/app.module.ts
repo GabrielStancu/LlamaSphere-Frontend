@@ -16,6 +16,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DeveloperComponent } from './components/developer/developer.component';
 import { RecruiterComponent } from './components/recruiter/recruiter.component';
+import { DndDirective } from './directives/dnd.directive';
+import { FileUploadComponent } from './components/shared/file-upload/file-upload.component';
+import { ProgressComponent } from './components/shared/progress/progress.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { RecruiterComponent } from './components/recruiter/recruiter.component';
     LoginComponent,
     RegisterComponent,
     DeveloperComponent,
-    RecruiterComponent
+    RecruiterComponent,
+    DndDirective,
+    FileUploadComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
