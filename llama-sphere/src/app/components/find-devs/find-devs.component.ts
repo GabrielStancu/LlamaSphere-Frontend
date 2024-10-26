@@ -18,6 +18,7 @@ displayedColumns: string[] = ['name', 'score', 'explanation', 'actions'];
 loadingJobs: boolean = false;
 errorLoadingJobs: string = '';
 filterCriteria: string = '';
+currentJobId: string = '';
 
 // Properties for the FAQ Chat
 isChatVisible: boolean = false;
@@ -150,7 +151,7 @@ sendQuestion(): void {
 
   public receiveFile(file: File) {
     this.uploadService.uploadJob(file).subscribe(result =>
-      alert("File Uploaded!")
+      this.currentJobId = result.id
     );
   }
 }

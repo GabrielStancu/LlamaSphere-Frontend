@@ -13,6 +13,7 @@ export class FindJobComponent {
   displayedColumns: string[] = ['title', 'score', 'explanation'];
   loadingJobs: boolean = false;
   errorLoadingJobs: string = '';
+  currentCvId: string = '';
 
   // Properties for the FAQ Chat
   isChatVisible: boolean = false;
@@ -87,8 +88,9 @@ export class FindJobComponent {
   }
 
   public receiveFile(file: File) {
-    this.uploadService.uploadCv(file).subscribe(result =>
-      alert("File Uploaded!")
+    this.uploadService.uploadCv(file).subscribe(result => {
+        this.currentCvId = result.id;
+      }
     );
   }
 }
