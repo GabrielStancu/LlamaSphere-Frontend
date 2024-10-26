@@ -260,25 +260,57 @@
 
 
 /* Styles for Action Buttons */
+/* Accept Button Styling */
 .accept-button {
-    background-color: #4CAF50; /* Green color for accept */
+    background-color: #418c89;
     color: white;
-    font-weight: bold;
-    margin-right: 5px;
-    transition: background-color 0.3s ease;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .accept-button:hover {
-    background-color: #45A049; /* Darker green on hover */
+    background-color: #66d9d3;
+    transform: translateY(-1px); /* Slight lift on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
 }
 
+.accept-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #4ba4a0; /* Light green focus ring */
+}
+
+/* Reject Button Styling */
 .reject-button {
-    background-color: #F44336; /* Red color for reject */
+    background-color: #F44336;
     color: white;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .reject-button:hover {
-    background-color: #D32F2F; /* Darker red on hover */
+    background-color: #D32F2F;
+    transform: translateY(-1px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.reject-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.5); /* Light red focus ring */
+}
+
