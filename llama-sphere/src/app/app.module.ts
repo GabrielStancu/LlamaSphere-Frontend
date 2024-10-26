@@ -24,6 +24,9 @@ import { DeveloperCvComponent } from './components/developer-cv/developer-cv.com
 import { RecruiterJobComponent } from './components/recruiter-job/recruiter-job.component';
 import { NavigationComponent } from './components/shared/navigation/navigation.component';
 import { TopbarComponent } from './components/shared/topbar/topbar.component';
+import { MatchingService } from './services/matching.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { TopbarComponent } from './components/shared/topbar/topbar.component';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    MatTableModule,
 
     MatDatepickerModule,
     MatFormFieldModule,
@@ -54,7 +59,7 @@ import { TopbarComponent } from './components/shared/topbar/topbar.component';
     MatInputModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [MatchingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
