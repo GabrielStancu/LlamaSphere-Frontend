@@ -106,7 +106,7 @@
         <table mat-table [dataSource]="matchedDevs" class="mat-elevation-z8">
 
             <!-- Dev Name Column -->
-            <ng-container matColumnDef="name">
+            <ng-container matColumnDef="candidate_name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let dev"> {{ dev.candidate_name }} </td>
             </ng-container>
@@ -118,7 +118,7 @@
             </ng-container>
 
             <!-- Explanation Column -->
-            <ng-container matColumnDef="explanation">
+            <ng-container matColumnDef="general_reasoning">
                 <th mat-header-cell *matHeaderCellDef> Explanation </th>
                 <td mat-cell *matCellDef="let dev"> {{ dev.general_reasoning }} </td>
             </ng-container>

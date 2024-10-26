@@ -121,14 +121,20 @@ export class MatchingService {
   }
 
   sendEmail(data: any): Observable<any> {
-    const url = `${this.faqUrl}/send-email`;
-    return this.http.post<any>(url, { data });
+    const url = `${this.apiUrl}/Response`;
+    return this.http.post<any>(url, data );
     // return of('send email response');
   }
 
   getEmailTemplate(data: any): Observable<any> {
+    const url = `${this.reasoningUrl}/email_response`;
+    return this.http.post<any>(url, data );
+    // return of('Email text for accepting the candidate.');
+  }
+
+  getFinalReasoning(data: any): Observable<any> {
     const url = `${this.reasoningUrl}/reasoning`;
-    return this.http.post<any>(url, { data });
+    return this.http.post<any>(url, data );
     // return of('Email text for accepting the candidate.');
   }
 }

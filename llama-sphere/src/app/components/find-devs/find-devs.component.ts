@@ -19,7 +19,7 @@ export class FindDevsComponent {
 matchedDevs: any[] = [];
 availableJobs: { id: string, title: string }[] = [];
 selectedJob: string | null = null;
-displayedColumns: string[] = ['candidate_name', 'score', 'general_reasoning'];
+displayedColumns: string[] = ['candidate_name', 'score', 'general_reasoning', 'actions'];
 loadingJobs: boolean = false;
 errorLoadingJobs: string = '';
 filterCriteria: string = '';
@@ -80,25 +80,31 @@ sendQuestion(): void {
 }
 
   onGetMatchedDevs(): void {
-    if (this.selectedJob) {
+    const requestData = {}
+    if (this.currentJobId) {
       const requestData = {
           ProjectId: this.currentJobId,
           Keywords: this.constructKeywordsObject()
       };
-
-      // Make a request using MatchingService with jobId and filterCriteria
-      this.matchingService.getMatchedCandidates(requestData).subscribe(
-        (candidates) => {
-          this.matchedDevs = candidates;
-        },
-        (error) => {
-          this.errorLoadingJobs = 'An error occurred while fetching matching candidates.';
-          console.error(error);
-        }
-      );
-    } else {
-      alert('Please select a job to find matching candidates.');
+    } else if (this.selectedJob) {
+      const requestData = {
+        ProjectId: this.selectedJob,
+        Keywords: this.constructKeywordsObject()
+      };
+    } else{
+      alert('Please upload or select a job to find matching candidates.');
     }
+
+    // Make a request using MatchingService with jobId and filterCriteria
+    this.matchingService.getMatchedCandidates(requestData).subscribe(
+      (candidates) => {
+        this.matchedDevs = candidates;
+      },
+      (error) => {
+        this.errorLoadingJobs = 'An error occurred while fetching matching candidates.';
+        console.error(error);
+      }
+    );
   }
 
   private constructKeywordsObject(): { [key: string]: number } {
