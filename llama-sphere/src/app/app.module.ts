@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,8 @@ import { FileUploadComponent } from './components/shared/file-upload/file-upload
 import { ProgressComponent } from './components/shared/progress/progress.component';
 import { DeveloperCvComponent } from './components/developer-cv/developer-cv.component';
 import { RecruiterJobComponent } from './components/recruiter-job/recruiter-job.component';
+import { NavigationComponent } from './components/shared/navigation/navigation.component';
+import { TopbarComponent } from './components/shared/topbar/topbar.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { RecruiterJobComponent } from './components/recruiter-job/recruiter-job.
     FileUploadComponent,
     ProgressComponent,
     DeveloperCvComponent,
-    RecruiterJobComponent
+    RecruiterJobComponent,
+    NavigationComponent,
+    TopbarComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,8 @@ import { RecruiterJobComponent } from './components/recruiter-job/recruiter-job.
     MatListModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
