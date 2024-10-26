@@ -87,7 +87,7 @@ export class FindJobComponent {
   }
 
   public receiveFile(file: File) {
-    this.uploadService.uploadJob(file).subscribe(result =>
+    this.uploadService.uploadCv(file).subscribe(result =>
       alert("File Uploaded!")
     );
   }
