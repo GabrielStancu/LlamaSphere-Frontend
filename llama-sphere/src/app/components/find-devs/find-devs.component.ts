@@ -38,13 +38,7 @@ weightError: string | null = null;
 constructor(private dialog: MatDialog, private matchingService: MatchingService, private uploadService : UploadService) { }
 
 ngOnInit(): void {
-  // Initialization logic
   this.fetchAvailableJobs();
-}
-
-// Existing methods
-onGetMatchingJobs(): void {
-  // Your existing code
 }
 
 // Methods to control chat visibility
