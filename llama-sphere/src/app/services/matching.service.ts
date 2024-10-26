@@ -69,7 +69,7 @@ export class MatchingService {
     return of(jobs);
   }
 
-  getMatchedCandidates(selectedJob: string) {
+  getMatchedCandidates(selectedJob: any) {
     const candidates = [
       {
         name: 'Vulsan Bianca',
@@ -94,5 +94,17 @@ export class MatchingService {
   sendFaqQuestion(question: string): Observable<any> {
     const url = `${this.apiUrl}/faq`;
     return this.http.post<any>(url, { question });
+  }
+
+  sendEmail(id: any, editedMessage: string) {
+    return of('send email response');
+  }
+
+  getAcceptEmailTemplate(id: any) {
+    return of('Email text for accepting the candidate.');
+  }
+
+  getRejectEmailTemplate(id: any) {
+    return of('Email text for rejecting the candidate.');
   }
 }

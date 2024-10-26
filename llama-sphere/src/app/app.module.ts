@@ -29,6 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { FindJobComponent } from './components/find-job/find-job.component';
 import { FindDevsComponent } from './components/find-devs/find-devs.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AppAcceptRejectDialogComponent } from './components/app-accept-reject-dialog/app-accept-reject-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { FindDevsComponent } from './components/find-devs/find-devs.component';
     NavigationComponent,
     TopbarComponent,
     FindJobComponent,
-    FindDevsComponent
+    FindDevsComponent,
+    AppAcceptRejectDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { FindDevsComponent } from './components/find-devs/find-devs.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MatTableModule,
+    MatDialogModule,
 
     MatDatepickerModule,
     MatFormFieldModule,

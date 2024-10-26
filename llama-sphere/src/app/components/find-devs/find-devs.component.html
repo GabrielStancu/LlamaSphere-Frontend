@@ -54,6 +54,12 @@
             </mat-select>
         </mat-form-field>
 
+        <!-- Text Box for Custom Input -->
+        <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>Filter Criteria</mat-label>
+            <input matInput [(ngModel)]="filterCriteria" placeholder="Enter criteria">
+        </mat-form-field>
+
         <!-- Button to get matching jobs -->
         <button mat-raised-button color="primary" class="matching-jobs-button" (click)="onGetMatchedJobs()">
             Find Matching Candidates
@@ -116,6 +122,6 @@
     <!-- <div *ngIf="allJobs && allJobs.length === 0 && !loadingJobs">
         <p>No matching jobs found at this time.</p>
     </div> -->
-      
+
 
   </div>

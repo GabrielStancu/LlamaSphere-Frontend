@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatchingService } from 'src/app/services/matching.service';
+import { AppAcceptRejectDialogComponent } from '../app-accept-reject-dialog/app-accept-reject-dialog.component';
 
 @Component({
   selector: 'app-find-devs',
@@ -14,6 +16,7 @@ selectedJob: string | null = null;
 displayedColumns: string[] = ['name', 'score', 'explanation', 'actions'];
 loadingJobs: boolean = false;
 errorLoadingJobs: string = '';
+filterCriteria: string = '';
 
 // Properties for the FAQ Chat
 isChatVisible: boolean = false;
@@ -22,7 +25,7 @@ chatMessages: { sender: string, message: string }[] = [];
 hideChatTimeout: any;
 selectedJobTitle: string = 'Select Job';
 
-constructor(private matchingService: MatchingService) { }
+constructor(private dialog: MatDialog, private matchingService: MatchingService) { }
 
 ngOnInit(): void {
   // Initialization logic
@@ -72,8 +75,13 @@ sendQuestion(): void {
 
   onGetMatchedJobs(): void {
     if (this.selectedJob) {
-      // Fetch matching candidates for the selected job
-      this.matchingService.getMatchedCandidates(this.selectedJob).subscribe(
+      const requestData = {
+        jobId: this.selectedJob,
+        filter: this.filterCriteria // Add filter criteria to request
+      };
+      
+      // Make a request using MatchingService with jobId and filterCriteria
+      this.matchingService.getMatchedCandidates(requestData).subscribe(
         (candidates) => {
           this.matchedDevs = candidates;
         },
@@ -105,14 +113,38 @@ sendQuestion(): void {
   }
 
   sendAcceptEmail(dev: any): void {
-    // Send accept email logic here
-    console.log(`Accept email sent to ${dev.name}`);
-    // Add actual request code here, e.g., call a service method
+    // Fetch initial response text for "Accept" email from backend
+    this.matchingService.getAcceptEmailTemplate(dev.id).subscribe((response: string) => {
+      const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
+        width: '400px',
+        data: { message: response, action: 'Accept' }
+      });
+
+      dialogRef.afterClosed().subscribe((editedMessage: string) => {
+        if (editedMessage) {
+          this.matchingService.sendEmail(dev.id, editedMessage).subscribe(() => {
+            console.log('Accept email sent successfully');
+          });
+        }
+      });
+    });
   }
 
   sendRejectEmail(dev: any): void {
-    // Send reject email logic here
-    console.log(`Reject email sent to ${dev.name}`);
-    // Add actual request code here, e.g., call a service method
+    // Fetch initial response text for "Reject" email from backend
+    this.matchingService.getRejectEmailTemplate(dev.id).subscribe((response: string) => {
+      const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
+        width: '400px',
+        data: { message: response, action: 'Reject' }
+      });
+      dialogRef.afterClosed().subscribe((editedMessage: string) => {
+        if (editedMessage) {
+          this.matchingService.sendEmail(dev.id, editedMessage).subscribe(() => {
+            console.log('Reject email sent successfully');
+          });
+        }
+      });
+    });
   }
+
 }

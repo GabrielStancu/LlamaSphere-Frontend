@@ -184,6 +184,12 @@
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Styling for the filter text box */
+.filter-input {
+    width: 200px;
+}
+
+
 /* Styles for the loading indicator */
 .loading-indicator {
     display: flex;
