@@ -7,10 +7,17 @@ import { MatchingService } from 'src/app/services/matching.service';
   styleUrls: ['./recruiter.component.css']
 })
 export class RecruiterComponent {
+    selectedTable: string = 'Jobs'; // Default to 'Jobs'
+
     allJobs: any[] = [];
-    displayedColumns: string[] = ['title', 'score', 'explanation'];
+    displayedColumns: string[] = ['title'];
     loadingJobs: boolean = false;
     errorLoadingJobs: string = '';
+
+    allDevs: any[] = [];
+    displayedColumnsDevs: string[] = ['name'];
+    loadingDevs: boolean = false;
+    errorLoadingDevs: string = ''
 
     // Properties for the FAQ Chat
     isChatVisible: boolean = false;
@@ -23,6 +30,7 @@ export class RecruiterComponent {
     ngOnInit(): void {
       // Initialization logic
       this.onGetAllJobs();
+      this.onGetAllDevs();
     }
   
     // Existing methods
@@ -83,5 +91,28 @@ export class RecruiterComponent {
           this.loadingJobs = false;
         }
       );
+    }
+
+    onGetAllDevs(): void {
+      this.loadingDevs = true;
+      this.errorLoadingDevs = '';
+      this.allDevs = [];
+  
+      this.matchingService.getAllDevelopers().subscribe(
+        (devs) => {
+          this.allDevs = devs;
+          this.loadingDevs = false;
+          console.log('Get all devs:', this.allDevs);
+        },
+        (error) => {
+          console.error('Error fetching all the devs:', error);
+          this.errorLoadingDevs = 'An error occurred while fetching all the devs.';
+          this.loadingDevs = false;
+        }
+      );
+    }
+
+    onTableSelectionChange(event: any): void {
+      this.selectedTable = event.value; // Update the selected table based on dropdown selection
     }
 }

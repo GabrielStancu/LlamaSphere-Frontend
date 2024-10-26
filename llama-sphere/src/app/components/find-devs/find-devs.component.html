@@ -57,14 +57,36 @@
         <!-- Text Box for Custom Input -->
         <mat-form-field appearance="outline" class="filter-input">
             <mat-label>Filter Criteria</mat-label>
-            <input matInput [(ngModel)]="filterCriteria" placeholder="Enter criteria">
+            <input matInput [(ngModel)]="newFilter" placeholder="Enter criteria">
         </mat-form-field>
 
-        <!-- Button to get matching jobs -->
-        <button mat-raised-button color="primary" class="matching-jobs-button" (click)="onGetMatchedJobs()">
-            Find Matching Candidates
-        </button>
+        <!-- Number Input for Weighted Skills Criteria -->
+        <mat-form-field appearance="outline" class="number-input">
+            <mat-label>Weight</mat-label>
+            <input matInput type="number" [(ngModel)]="newWeight" placeholder="Enter Weight">
+        </mat-form-field>
+
+        <!-- Button to add filter-weight pair -->
+        <button mat-raised-button color="primary" class="matching-jobs-button" (click)="addFilterWeightPair()">Add Filter-Weight</button>
     </div>
+
+
+    <!-- Display Filter-Weight Pairs -->
+    <div class="filter-weight-list">
+        <h4>Selected Filter-Weight Pairs</h4>
+        <div *ngFor="let pair of filterWeights; let i = index" class="filter-weight-item">
+            <span>{{ pair.filter }} - {{ pair.weight }}%</span>
+            <button mat-icon-button (click)="removeFilterWeightPair(i)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- Button to get matching jobs -->
+    <button mat-raised-button color="primary" class="matching-jobs-button" (click)="onGetMatchedDevs()">
+        Find Matching Candidates
+    </button>
+    <div *ngIf="weightError" class="error-message">{{ weightError }}</div>
 
     <!-- Loading Indicator -->
     <div *ngIf="loadingJobs" class="loading-indicator">

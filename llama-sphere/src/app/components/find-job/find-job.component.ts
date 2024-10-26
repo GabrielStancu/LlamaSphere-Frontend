@@ -23,15 +23,6 @@ export class FindJobComponent {
 
   constructor(private matchingService: MatchingService, private uploadService: UploadService) { }
 
-  ngOnInit(): void {
-    // Initialization logic
-  }
-
-  // Existing methods
-  onGetMatchingJobs(): void {
-    // Your existing code
-  }
-
   // Methods to control chat visibility
   showChat(): void {
     clearTimeout(this.hideChatTimeout);
@@ -68,12 +59,16 @@ export class FindJobComponent {
     }
   }
 
-  onGetAllJobs(): void {
+  onGetMatchedJobs(): void {
     this.loadingJobs = true;
     this.errorLoadingJobs = '';
     this.allJobs = [];
 
-    this.matchingService.getAllJobs().subscribe(
+    const requestData = {
+      CvId: '1',
+    };
+
+    this.matchingService.getMatchedJobs(requestData).subscribe(
       (jobs) => {
         this.allJobs = jobs;
         this.loadingJobs = false;

@@ -7,13 +7,13 @@ import { Observable, of } from 'rxjs';
 })
 export class MatchingService {
 
-  private apiUrl = 'http://your-backend-api.com/api/matching-jobs';
+  private apiUrl = 'https://localhost:7037/api';
   private faqUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) { }
 
   getAllJobs(): Observable<any[]> {
-    // const url = `${this.apiUrl}/developer/matching-jobs`;
+    // const url = `${this.apiUrl}/developer/all-jobs`;
     // return this.http.get<any[]>(url);
     // Hardcoded job data
     const jobs = [
@@ -41,36 +41,8 @@ export class MatchingService {
     return of(jobs);
   }
 
-  getMatchedJobs() {
-    // const url = `${this.apiUrl}/developer/matching-jobs`;
-    // return this.http.get<any[]>(url);
-    // Hardcoded job data
-    const jobs = [
-      {
-        id: '1',
-        title: 'Senior Software Engineer1',
-        score: 95,
-        explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
-      },
-      {
-        id: '2',
-        title: 'Full Stack Developer1',
-        score: 88,
-        explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
-      },
-      {
-        id: '3',
-        title: 'Backend Developer1',
-        score: 80,
-        explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
-      }
-    ];
-
-    // Return the jobs as an Observable
-    return of(jobs);
-  }
-
-  getMatchedCandidates(selectedJob: any) {
+  getAllDevelopers(): Observable<any> {
+    // return this.http.get(`${this.apiUrl}/developers`);
     const candidates = [
       {
         name: 'Vulsan Bianca',
@@ -92,20 +64,76 @@ export class MatchingService {
     return of(candidates);
   }
 
+  getMatchedJobs(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/Jobs`, data);
+    // const jobs = [
+    //   {
+    //     id: '1',
+    //     title: 'Senior Software Engineer1',
+    //     score: 95,
+    //     explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
+    //   },
+    //   {
+    //     id: '2',
+    //     title: 'Full Stack Developer1',
+    //     score: 88,
+    //     explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
+    //   },
+    //   {
+    //     id: '3',
+    //     title: 'Backend Developer1',
+    //     score: 80,
+    //     explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
+    //   }
+    // ];
+
+    // Return the jobs as an Observable
+    // return of(jobs);
+  }
+
+  getMatchedCandidates(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/Cvs`, data);
+    // const candidates = [
+    //   {
+    //     name: 'Vulsan Bianca',
+    //     score: 95,
+    //     explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
+    //   },
+    //   {
+    //     name: 'Muscalagiu Anca',
+    //     score: 88,
+    //     explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
+    //   },
+    //   {
+    //     name: 'Toma Maria',
+    //     score: 80,
+    //     explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
+    //   }
+    // ];
+
+    // return of(candidates);
+  }
+
   sendFaqQuestion(user_question: string): Observable<any> {
     const url = `${this.faqUrl}/ask-question`;
     return this.http.post<any>(url, { user_question });
   }
 
-  sendEmail(id: any, editedMessage: string) {
+  sendEmail(data: any): Observable<any> {
+    // const url = `${this.faqUrl}/send-email`;
+    // return this.http.post<any>(url, { data });
     return of('send email response');
   }
 
-  getAcceptEmailTemplate(id: any) {
+  getAcceptEmailTemplate(data: any): Observable<any> {
+    // const url = `${this.faqUrl}/get-accept-email-template`;
+    // return this.http.post<any>(url, { data });
     return of('Email text for accepting the candidate.');
   }
 
-  getRejectEmailTemplate(id: any) {
+  getRejectEmailTemplate(data: any): Observable<any> {
+    // const url = `${this.faqUrl}/get-reject-email-template`;
+    // return this.http.post<any>(url, { data });
     return of('Email text for rejecting the candidate.');
   }
 }

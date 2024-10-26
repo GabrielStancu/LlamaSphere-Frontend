@@ -4,6 +4,11 @@ import { MatchingService } from 'src/app/services/matching.service';
 import { AppAcceptRejectDialogComponent } from '../app-accept-reject-dialog/app-accept-reject-dialog.component';
 import { UploadService } from 'src/app/services/upload.service';
 
+interface FilterWeightPair {
+  filter: string;
+  weight: number | null;
+}
+
 @Component({
   selector: 'app-find-devs',
   templateUrl: './find-devs.component.html',
@@ -27,16 +32,15 @@ chatMessages: { sender: string, message: string }[] = [];
 hideChatTimeout: any;
 selectedJobTitle: string = 'Select Job';
 
+newFilter: string = '';
+newWeight: number | null = null;
+filterWeights: FilterWeightPair[] = [];
+weightError: string | null = null;
+
 constructor(private dialog: MatDialog, private matchingService: MatchingService, private uploadService : UploadService) { }
 
 ngOnInit(): void {
-  // Initialization logic
   this.fetchAvailableJobs();
-}
-
-// Existing methods
-onGetMatchingJobs(): void {
-  // Your existing code
 }
 
 // Methods to control chat visibility
@@ -75,11 +79,11 @@ sendQuestion(): void {
   }
 }
 
-  onGetMatchedJobs(): void {
+  onGetMatchedDevs(): void {
     if (this.selectedJob) {
       const requestData = {
-        jobId: this.selectedJob,
-        filter: this.filterCriteria // Add filter criteria to request
+          ProjectId: this.selectedJob,
+          Keywords: this.constructKeywordsObject()
       };
 
       // Make a request using MatchingService with jobId and filterCriteria
@@ -95,6 +99,16 @@ sendQuestion(): void {
     } else {
       alert('Please select a job to find matching candidates.');
     }
+  }
+
+  private constructKeywordsObject(): { [key: string]: number } {
+    const keywords: { [key: string]: number } = {};
+
+    this.filterWeights.forEach(pair => {
+      keywords[pair.filter] = pair.weight || 0; // Assign weight or default to 0
+    });
+
+    return keywords;
   }
 
   fetchAvailableJobs(): void {
@@ -124,7 +138,7 @@ sendQuestion(): void {
 
       dialogRef.afterClosed().subscribe((editedMessage: string) => {
         if (editedMessage) {
-          this.matchingService.sendEmail(dev.id, editedMessage).subscribe(() => {
+          this.matchingService.sendEmail(editedMessage).subscribe(() => {
             console.log('Accept email sent successfully');
           });
         }
@@ -141,7 +155,7 @@ sendQuestion(): void {
       });
       dialogRef.afterClosed().subscribe((editedMessage: string) => {
         if (editedMessage) {
-          this.matchingService.sendEmail(dev.id, editedMessage).subscribe(() => {
+          this.matchingService.sendEmail(editedMessage).subscribe(() => {
             console.log('Reject email sent successfully');
           });
         }
@@ -154,4 +168,47 @@ sendQuestion(): void {
       this.currentJobId = result.id
     );
   }
+
+  // Add new filter-weight pair
+  addFilterWeightPair(): void {
+    // Check if weight exceeds 100
+    const currentTotalWeight = this.filterWeights.reduce((acc, pair) => acc + (pair.weight || 0), 0);
+    const newWeightValue = this.newWeight || 0;
+    if (currentTotalWeight + newWeightValue > 100) {
+      this.weightError = 'Total weight cannot exceed 100%';
+      return;
+    }
+
+    // Add new filter-weight pair to the list
+    this.filterWeights.push({ filter: this.newFilter, weight: this.newWeight });
+    this.newFilter = '';
+    this.newWeight = null;
+    this.weightError = null; // Clear any previous error
+  }
+
+  // Remove a filter-weight pair
+  removeFilterWeightPair(index: number): void {
+    this.filterWeights.splice(index, 1);
+    this.validateWeights();
+  }
+
+  // Check if weights sum to 100
+  isWeightValid(): boolean {
+    const totalWeight = this.filterWeights.reduce((acc, pair) => acc + (pair.weight || 0), 0);
+    return totalWeight === 100;
+  }
+
+  // Validate weights and adjust if necessary
+  validateWeights(): void {
+    const totalWeight = this.filterWeights.reduce((acc, pair) => acc + (pair.weight || 0), 0);
+
+    if (totalWeight > 100) {
+      this.weightError = 'Total weight cannot exceed 100%';
+    } else if (totalWeight < 100) {
+      this.weightError = 'Total weight must be exactly 100%';
+    } else {
+      this.weightError = null; // Clear any error if weights are valid
+    }
+  }
+
 }
