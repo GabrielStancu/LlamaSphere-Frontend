@@ -19,12 +19,12 @@ export class NavigationComponent {
   }
 
   initSidebarOptions(): void {
-    // const userType = localStorage.getItem('nvision-userType');
-    // if (userType === 'developer') {
+    const userType = localStorage.getItem('llama-userType');
+    if (userType === 'developer') {
       this.initDeveloperSidebarMenu();
-    // } else {
-    //   this.initRecruiterSidebarMenu();
-    // }
+    } else {
+      this.initRecruiterSidebarMenu();
+    }
   }
 
   onOptionMouseOver(sidebarOption: SidebarOption): void {
@@ -46,7 +46,7 @@ export class NavigationComponent {
     this.sidebarOptions = [
       new SidebarOption('NVision', 'logo-apple', '/developer'),
       new SidebarOption('Dashboard', 'home', '/developer', false, true),
-      new SidebarOption('Account', 'person', '/watcher-account'),
+      new SidebarOption('Account', 'person', '/'),
       new SidebarOption('Jobs', 'business_center', '/find-jobs'),
       new SidebarOption('Log Out', 'power_off', '/login', true)
     ];
@@ -56,7 +56,7 @@ export class NavigationComponent {
     this.sidebarOptions = [
       new SidebarOption('NVision', 'logo-apple', '/recruiter'),
       new SidebarOption('Dashboard', 'home', '/recruiter', false, true),
-      new SidebarOption('Account', 'person', '/watcher-account'),
+      new SidebarOption('Account', 'person', '/'),
       new SidebarOption('Appliants', 'business_center', '/find-devs'),
       new SidebarOption('Log Out', 'power_off', '/login', true)
     ];

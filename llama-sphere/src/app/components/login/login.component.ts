@@ -16,9 +16,11 @@ export class LoginComponent {
   }
 
   public onLoginClicked() {
-    if (this.loginUser.username === 'recruiter' && this.loginUser.password === 'recruiter') {
+    if (this.loginUser.username === 'r' && this.loginUser.password === 'r') {
+      localStorage.setItem('llama-userType', 'recruiter');
       this.router.navigate(['/recruiter']);
     } else {
+      localStorage.setItem('llama-userType', 'developer');
       this.router.navigate(['/developer']);
     }
   }
