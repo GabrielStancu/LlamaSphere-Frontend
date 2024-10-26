@@ -144,7 +144,11 @@ sendQuestion(): void {
 
       dialogRef.afterClosed().subscribe((editedMessage: string) => {
         if (editedMessage) {
-          this.matchingService.sendEmail(editedMessage).subscribe(() => {
+          const mailRequestData = {
+            subject: "Welcome to Our Team",
+            content: editedMessage,
+          };
+          this.matchingService.sendEmail(mailRequestData).subscribe(() => {
             console.log('Accept email sent successfully');
           });
         }
@@ -159,15 +163,20 @@ sendQuestion(): void {
       reasoning_3: dev.domain_reasoning,
       accepted: false
     };
+
     // Fetch initial response text for "Reject" email from backend
     this.matchingService.getEmailTemplate(requestData).subscribe((response: string) => {
       const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
         width: '400px',
-        data: { message: response, action: 'Reject' }
+        data: { reasoning: response }
       });
       dialogRef.afterClosed().subscribe((editedMessage: string) => {
         if (editedMessage) {
-          this.matchingService.sendEmail(editedMessage).subscribe(() => {
+          const mailRequestData = {
+            subject: "Thank You for Your Application",
+            content: editedMessage,
+          };
+          this.matchingService.sendEmail(mailRequestData).subscribe(() => {
             console.log('Reject email sent successfully');
           });
         }

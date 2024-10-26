@@ -121,9 +121,9 @@ export class MatchingService {
   }
 
   sendEmail(data: any): Observable<any> {
-    // const url = `${this.faqUrl}/send-email`;
-    // return this.http.post<any>(url, { data });
-    return of('send email response');
+    const url = `${this.faqUrl}/send-email`;
+    return this.http.post<any>(url, { data });
+    // return of('send email response');
   }
 
   getEmailTemplate(data: any): Observable<any> {
