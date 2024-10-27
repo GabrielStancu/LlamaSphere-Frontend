@@ -19,7 +19,7 @@ export class NavigationComponent {
   }
 
   initSidebarOptions(): void {
-    const userType = localStorage.getItem('llama-userType');
+    const userType = localStorage.getItem('llm-userType');
     if (userType === 'developer') {
       this.initDeveloperSidebarMenu();
     } else {
