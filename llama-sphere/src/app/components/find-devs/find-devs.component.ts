@@ -41,10 +41,6 @@ weightError: string | null = null;
 constructor(private dialog: MatDialog, private matchingService: MatchingService, private uploadService : UploadService) { }
 
 ngOnInit(): void {
-  const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
-    width: '700px',
-    data: ''
-  });
   this.fetchAvailableJobs();
 }
 
