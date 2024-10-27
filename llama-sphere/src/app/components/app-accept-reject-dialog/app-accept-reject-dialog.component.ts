@@ -11,10 +11,10 @@ export class AppAcceptRejectDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AppAcceptRejectDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { message: string; action: string }
+    @Inject(MAT_DIALOG_DATA) public data: string
   ) {
     // Initialize emailMessage with the response data
-    this.emailMessage = data.message;
+    this.emailMessage = data;
   }
 
   onCancel(): void {

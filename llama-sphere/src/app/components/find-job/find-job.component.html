@@ -16,7 +16,7 @@
             <!-- You can use an icon or text -->
             <img src="assets/faq-icon.svg" alt="FAQ">
         </button>
-    
+
         <!-- The Chat Window -->
         <div
             class="chat-window"
@@ -68,7 +68,7 @@
         <table mat-table [dataSource]="allJobs" class="mat-elevation-z8">
 
         <!-- Job Title Column -->
-        <ng-container matColumnDef="title">
+        <ng-container matColumnDef="job_name">
             <th mat-header-cell *matHeaderCellDef> Job Title </th>
             <td mat-cell *matCellDef="let job"> {{ job.job_name }} </td>
         </ng-container>

@@ -80,14 +80,14 @@ sendQuestion(): void {
 }
 
   onGetMatchedDevs(): void {
-    const requestData = {}
+    var requestData = {}
     if (this.currentJobId) {
-      const requestData = {
+      requestData = {
           ProjectId: this.currentJobId,
           Keywords: this.constructKeywordsObject()
       };
     } else if (this.selectedJob) {
-      const requestData = {
+      requestData = {
         ProjectId: this.selectedJob,
         Keywords: this.constructKeywordsObject()
       };
@@ -139,13 +139,13 @@ sendQuestion(): void {
       reasoning_1: dev.general_reasoning,
       reasoning_2: dev.tehnical_reasoning,
       reasoning_3: dev.domain_reasoning,
-      accepted: true
+      accepted: 'true'
     };
     // Fetch initial response text for "Accept" email from backend
-    this.matchingService.getEmailTemplate(requestData).subscribe((response: string) => {
+    this.matchingService.getEmailTemplate(requestData).subscribe( response => {
       const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
         width: '400px',
-        data: { reasoning: response}
+        data: response.email_response
       });
 
       dialogRef.afterClosed().subscribe((editedMessage: string) => {
@@ -167,14 +167,14 @@ sendQuestion(): void {
       reasoning_1: dev.general_reasoning,
       reasoning_2: dev.tehnical_reasoning,
       reasoning_3: dev.domain_reasoning,
-      accepted: false
+      accepted: 'false'
     };
 
     // Fetch initial response text for "Reject" email from backend
-    this.matchingService.getEmailTemplate(requestData).subscribe((response: string) => {
+    this.matchingService.getEmailTemplate(requestData).subscribe(response => {
       const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
         width: '400px',
-        data: { reasoning: response }
+        data: response.email_response
       });
       dialogRef.afterClosed().subscribe((editedMessage: string) => {
         if (editedMessage) {
