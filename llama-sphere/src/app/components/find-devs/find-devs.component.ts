@@ -173,9 +173,7 @@ sendQuestion(): void {
       reasoning_1: dev.general_reasoning,
       reasoning_2: dev.tehnical_reasoning,
       reasoning_3: dev.domain_reasoning,
-      accepted: 'true',
-      candidate_name: dev.candidate_name,
-      job_name: dev.job_name
+      accepted: 'true'
     };
     // Fetch initial response text for "Accept" email from backend
     this.matchingService.getEmailTemplate(requestData).subscribe( response => {
@@ -203,9 +201,7 @@ sendQuestion(): void {
       reasoning_1: dev.general_reasoning,
       reasoning_2: dev.tehnical_reasoning,
       reasoning_3: dev.domain_reasoning,
-      accepted: 'false',
-      candidate_name: dev.candidate_name,
-      job_name: dev.job_name
+      accepted: 'false'
     };
 
     // Fetch initial response text for "Reject" email from backend
