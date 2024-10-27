@@ -41,6 +41,10 @@ weightError: string | null = null;
 constructor(private dialog: MatDialog, private matchingService: MatchingService, private uploadService : UploadService) { }
 
 ngOnInit(): void {
+  const dialogRef = this.dialog.open(AppAcceptRejectDialogComponent, {
+    width: '700px',
+    data: ''
+  });
   this.fetchAvailableJobs();
 }
 
@@ -169,7 +173,9 @@ sendQuestion(): void {
       reasoning_1: dev.general_reasoning,
       reasoning_2: dev.tehnical_reasoning,
       reasoning_3: dev.domain_reasoning,
-      accepted: 'true'
+      accepted: 'true',
+      candidate_name: dev.candidate_name,
+      job_name: dev.job_name
     };
     // Fetch initial response text for "Accept" email from backend
     this.matchingService.getEmailTemplate(requestData).subscribe( response => {
@@ -197,7 +203,9 @@ sendQuestion(): void {
       reasoning_1: dev.general_reasoning,
       reasoning_2: dev.tehnical_reasoning,
       reasoning_3: dev.domain_reasoning,
-      accepted: 'false'
+      accepted: 'false',
+      candidate_name: dev.candidate_name,
+      job_name: dev.job_name
     };
 
     // Fetch initial response text for "Reject" email from backend
