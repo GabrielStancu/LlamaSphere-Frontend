@@ -99,7 +99,7 @@ sendQuestion(): void {
     this.matchingService.getMatchedCandidates(requestData).subscribe(
       (candidates) => {
         this.matchedDevs = candidates;
-        this.fetchReasoningForCandidates(candidates);
+        this.fetchReasoningForCandidates();
       },
       (error) => {
         this.errorLoadingJobs = 'An error occurred while fetching matching candidates.';
@@ -108,31 +108,30 @@ sendQuestion(): void {
     );
   }
 
-  private fetchReasoningForCandidates(candidates: any[]): void {
-    // Map each candidate to a reasoning request
-    const reasoningRequests = candidates.map(candidate => {
+  private fetchReasoningForCandidates(): void {  
+    try {
+      for (const candidate of this.matchedDevs) {
         // Create the requestData object for each candidate
         const requestData = {
-            reasoning_1: candidate.general_reasoning,
-            reasoning_2: candidate.tehnical_reasoning,
-            reasoning_3: candidate.domain_reasoning,
+          reasoning_1: candidate.general_reasoning,
+          reasoning_2: candidate.tehnical_reasoning,
+          reasoning_3: candidate.domain_reasoning,
         };
-
-        // Return the observable from getFinalReasoning for this candidate
-        return this.matchingService.getFinalReasoning(requestData).toPromise();
-    });
-
-    // Wait for all requests to complete
-    Promise.all(reasoningRequests).then((responses) => {
-        this.matchedDevs = candidates.map((candidate, index) => ({
-            ...candidate,
-            reasoning: responses[index].reasoning
-        }));
-    }).catch(error => {
-        console.error('Error fetching reasoning:', error);
-        this.errorLoadingJobs = 'An error occurred while fetching candidate reasoning.';
-    });
+  
+        // Await the response from getFinalReasoning
+        this.matchingService.getFinalReasoning(requestData).subscribe(result =>{
+          candidate.reasoning = result.reasoning;
+        });
+      }
+  
+      // Log the reasoning for each candidate after all requests are complete
+      console.log('Reasoning for candidates:', this.matchedDevs.map(dev => dev.reasoning));
+    } catch (error) {
+      console.error('Error fetching reasoning:', error);
+      this.errorLoadingJobs = 'An error occurred while fetching candidate reasoning.';
+    }
   }
+  
 
   private constructKeywordsObject(): { [key: string]: number } {
     const keywords: { [key: string]: number } = {};
