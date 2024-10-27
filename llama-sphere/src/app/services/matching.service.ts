@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class MatchingService {
 
-  private apiUrl = 'https://localhost:7037/api';
+  private apiUrl = 'http://192.168.1.3:5045/api';
   private faqUrl = 'http://127.0.0.1:8000';
   private reasoningUrl = 'http://192.168.1.7:5000';
 
@@ -61,18 +61,12 @@ export class MatchingService {
     const candidates = [
       {
         name: 'Vulsan Bianca',
-        score: 95,
-        explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
       },
       {
         name: 'Muscalagiu Anca',
-        score: 88,
-        explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
       },
       {
         name: 'Toma Maria',
-        score: 80,
-        explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
       }
     ];
 
