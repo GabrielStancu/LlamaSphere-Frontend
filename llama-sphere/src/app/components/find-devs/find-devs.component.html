@@ -70,7 +70,11 @@
         <button mat-raised-button color="primary" class="matching-jobs-button" (click)="addFilterWeightPair()">Add Filter-Weight</button>
     </div>
 
-
+    <!-- Loading Indicator -->
+    <div *ngIf="loadingDevs" class="loading-indicator">
+        <p>Loading matching candidates...</p>
+        <div class="spinner"></div>
+    </div>
     <!-- Display Filter-Weight Pairs -->
     <div class="filter-weight-list">
         <h4>Selected Filter-Weight Pairs</h4>

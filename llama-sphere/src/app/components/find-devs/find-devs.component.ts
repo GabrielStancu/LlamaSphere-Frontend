@@ -21,6 +21,7 @@ availableJobs: { id: string, title: string }[] = [];
 selectedJob: string | null = null;
 displayedColumns: string[] = ['candidate_name', 'score', 'reasoning', 'actions'];
 loadingJobs: boolean = false;
+loadingDevs: boolean = false;
 errorLoadingJobs: string = '';
 filterCriteria: string = '';
 currentJobId: string = '';
@@ -81,6 +82,7 @@ sendQuestion(): void {
 
   onGetMatchedDevs(): void {
     var requestData = {}
+    this.loadingDevs = true;
     if (this.currentJobId) {
       requestData = {
           ProjectId: this.currentJobId,
@@ -100,10 +102,12 @@ sendQuestion(): void {
       (candidates) => {
         this.matchedDevs = candidates;
         this.fetchReasoningForCandidates();
+        this.loadingDevs = false;
       },
       (error) => {
         this.errorLoadingJobs = 'An error occurred while fetching matching candidates.';
         console.error(error);
+        this.loadingDevs = false;
       }
     );
   }
