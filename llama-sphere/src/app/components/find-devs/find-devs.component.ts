@@ -223,45 +223,70 @@ sendQuestion(): void {
     );
   }
 
-  // Add new filter-weight pair
+  // Add a new filter-weight pair
   addFilterWeightPair(): void {
-    // Check if weight exceeds 100
-    const currentTotalWeight = this.filterWeights.reduce((acc, pair) => acc + (pair.weight || 0), 0);
-    const newWeightValue = this.newWeight || 0;
-    if (currentTotalWeight + newWeightValue > 100) {
-      this.weightError = 'Total weight cannot exceed 100%';
-      return;
+    // Calculate the total weight of specified filters
+    const specifiedWeightTotal = this.filterWeights.reduce((acc, pair) => acc + (pair.weight || 0), 0);
+    const specifiedWeight = this.newWeight || 0;
+
+    // Check if adding this weight would exceed 100%
+    if (specifiedWeightTotal + specifiedWeight > 100) {
+        this.weightError = 'Total weight cannot exceed 100%';
+        return;
     }
 
-    // Add new filter-weight pair to the list
+    // Add the new filter-weight pair to the list
     this.filterWeights.push({ filter: this.newFilter, weight: this.newWeight });
     this.newFilter = '';
     this.newWeight = null;
     this.weightError = null; // Clear any previous error
+
+    // Redistribute the remaining weight among unweighted filters
+    this.redistributeRemainingWeight();
   }
 
-  // Remove a filter-weight pair
+  // Remove a filter-weight pair and revalidate weights
   removeFilterWeightPair(index: number): void {
     this.filterWeights.splice(index, 1);
-    this.validateWeights();
+    this.redistributeRemainingWeight(); // Adjust weights after removing
   }
 
-  // Check if weights sum to 100
+  // Check if weights sum to 100 (used to enable/disable the submit button)
   isWeightValid(): boolean {
     const totalWeight = this.filterWeights.reduce((acc, pair) => acc + (pair.weight || 0), 0);
     return totalWeight === 100;
   }
 
-  // Validate weights and adjust if necessary
-  validateWeights(): void {
+  // Redistribute remaining weight among unweighted filters dynamically
+  private redistributeRemainingWeight(): void {
+    // Calculate total specified weight
+    const specifiedWeightTotal = this.filterWeights.reduce((acc, pair) => acc + (pair.weight || 0), 0);
+
+    // Identify unweighted filters
+    const unweightedFilters = this.filterWeights.filter(pair => pair.weight === null || pair.weight === undefined);
+
+    // Distribute remaining weight equally among unweighted filters if any exist
+    if (unweightedFilters.length > 0) {
+        const remainingWeight = 100 - specifiedWeightTotal;
+        const equalWeight = remainingWeight / unweightedFilters.length;
+
+        // Update weight for each unweighted filter
+        unweightedFilters.forEach(pair => pair.weight = equalWeight);
+    }
+
+    this.validateWeights(); // Validate the total after distribution
+  }
+
+  // Validate weights and update error message if necessary
+  private validateWeights(): void {
     const totalWeight = this.filterWeights.reduce((acc, pair) => acc + (pair.weight || 0), 0);
 
     if (totalWeight > 100) {
-      this.weightError = 'Total weight cannot exceed 100%';
-    } else if (totalWeight < 100) {
-      this.weightError = 'Total weight must be exactly 100%';
+        this.weightError = 'Total weight cannot exceed 100%';
+    } else if (totalWeight < 100 && this.filterWeights.every(pair => pair.weight !== null && pair.weight !== undefined)) {
+        this.weightError = 'Total weight must be exactly 100%';
     } else {
-      this.weightError = null; // Clear any error if weights are valid
+        this.weightError = null; // Clear any error if weights are valid
     }
   }
 
