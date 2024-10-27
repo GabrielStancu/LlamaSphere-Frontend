@@ -120,6 +120,7 @@ sendQuestion(): void {
           reasoning_1: candidate.general_reasoning,
           reasoning_2: candidate.tehnical_reasoning,
           reasoning_3: candidate.domain_reasoning,
+          direction: "cv2jobs"
         };
   
         // Await the response from getFinalReasoning
