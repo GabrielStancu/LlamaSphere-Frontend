@@ -222,7 +222,7 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: #1565C0;
+    color: #418c89;
     margin-top: 10px;
 }
 
@@ -230,7 +230,7 @@
     width: 24px;
     height: 24px;
     border: 4px solid #f3f3f3;
-    border-top: 4px solid #1565C0;
+    border-top: 4px solid #418c89;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-left: 10px;
