@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class MatchingService {
 
-  private apiUrl = 'http://192.168.1.3:5045/api';
+  private apiUrl = 'http://192.168.56.163:5045/api';
   private faqUrl = 'http://127.0.0.1:8000';
   private reasoningUrl = 'http://192.168.1.7:5000';
 

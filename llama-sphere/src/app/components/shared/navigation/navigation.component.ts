@@ -34,10 +34,12 @@ export class NavigationComponent {
 
   onOptionClick(sidebarOption: SidebarOption): void {
     if (sidebarOption.isLogOutOption) {
-      localStorage.removeItem('nvision-user');
-      localStorage.removeItem('nvision-userId');
-      localStorage.removeItem('nvision-jwt');
-      localStorage.removeItem('nvision-userType');
+      localStorage.removeItem('llm-token');
+      localStorage.removeItem('llm-id');
+      localStorage.removeItem('llm-userType');
+      localStorage.removeItem('llm-user');
+      localStorage.removeItem('llm-firstName');
+      localStorage.removeItem('llm-lastName');
     }
     this.router.navigate([sidebarOption.componentName]);
   }

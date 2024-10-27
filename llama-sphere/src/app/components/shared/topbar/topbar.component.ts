@@ -9,16 +9,11 @@ import { UserDisplayData } from 'src/app/models/user-display.model';
 export class TopbarComponent implements OnInit{
   public collapsedSidebar = true;
   @Output() sidebarChanged = new EventEmitter<{collapsed: boolean}>();
-  private readonly userId = Number(localStorage.getItem("devmatch-userId"));
-  private readonly userType = localStorage.getItem("devmatch-userType");
   public displayUser?: UserDisplayData;
 
   ngOnInit(): void {
-    // const request = new UserDisplayDataRequest(this.userType, this.userId);
-    // this.accountService.getUserDisplayData(request).subscribe(resp => {
-    //   this.displayUser = resp;
-    // });
-    this.displayUser = new UserDisplayData("John", "https://i.pravatar.cc/300");
+    const userName = localStorage.getItem("llm-firstName") ?? 'User';
+    this.displayUser = new UserDisplayData(userName, "./../../../../assets/profile.png");
   }
 
   toggleSidebar(): void {
