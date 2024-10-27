@@ -19,7 +19,7 @@ export class FindDevsComponent {
 matchedDevs: any[] = [];
 availableJobs: { id: string, title: string }[] = [];
 selectedJob: string | null = null;
-displayedColumns: string[] = ['candidate_name', 'score', 'general_reasoning', 'actions'];
+displayedColumns: string[] = ['candidate_name', 'score', 'reasoning', 'actions'];
 loadingJobs: boolean = false;
 errorLoadingJobs: string = '';
 filterCriteria: string = '';
@@ -99,12 +99,39 @@ sendQuestion(): void {
     this.matchingService.getMatchedCandidates(requestData).subscribe(
       (candidates) => {
         this.matchedDevs = candidates;
+        this.fetchReasoningForCandidates(candidates);
       },
       (error) => {
         this.errorLoadingJobs = 'An error occurred while fetching matching candidates.';
         console.error(error);
       }
     );
+  }
+
+  private fetchReasoningForCandidates(candidates: any[]): void {
+    // Map each candidate to a reasoning request
+    const reasoningRequests = candidates.map(candidate => {
+        // Create the requestData object for each candidate
+        const requestData = {
+            reasoning_1: candidate.general_reasoning,
+            reasoning_2: candidate.tehnical_reasoning,
+            reasoning_3: candidate.domain_reasoning,
+        };
+
+        // Return the observable from getFinalReasoning for this candidate
+        return this.matchingService.getFinalReasoning(requestData).toPromise();
+    });
+
+    // Wait for all requests to complete
+    Promise.all(reasoningRequests).then((responses) => {
+        this.matchedDevs = candidates.map((candidate, index) => ({
+            ...candidate,
+            reasoning: responses[index].reasoning
+        }));
+    }).catch(error => {
+        console.error('Error fetching reasoning:', error);
+        this.errorLoadingJobs = 'An error occurred while fetching candidate reasoning.';
+    });
   }
 
   private constructKeywordsObject(): { [key: string]: number } {

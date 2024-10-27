@@ -63,9 +63,9 @@
 
 
     <!-- Display the jobs in a table -->
-    <div *ngIf="allJobs && allJobs.length > 0" class="jobs-table-container">
+    <div *ngIf="matchedJobs && matchedJobs.length > 0" class="jobs-table-container">
         <h3>Your Matching Jobs:</h3>
-        <table mat-table [dataSource]="allJobs" class="mat-elevation-z8">
+        <table mat-table [dataSource]="matchedJobs" class="mat-elevation-z8">
 
         <!-- Job Title Column -->
         <ng-container matColumnDef="job_name">
@@ -80,10 +80,10 @@
         </ng-container>
 
         <!-- Explanation Column -->
-        <!-- <ng-container matColumnDef="explanation">
+        <ng-container matColumnDef="reasoning">
             <th mat-header-cell *matHeaderCellDef> Explanation </th>
-            <td mat-cell *matCellDef="let job"> {{ job.explanation }} </td>
-        </ng-container> -->
+            <td mat-cell *matCellDef="let job"> {{ job.reasoning }} </td>
+        </ng-container>
 
         <!-- Header and Row Declarations -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -91,11 +91,5 @@
 
         </table>
     </div>
-
-    <!-- Message if no jobs are found -->
-    <!-- <div *ngIf="allJobs && allJobs.length === 0 && !loadingJobs">
-        <p>No matching jobs found at this time.</p>
-    </div> -->
-
 
   </div>

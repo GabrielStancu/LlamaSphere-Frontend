@@ -9,8 +9,8 @@ import { UploadService } from 'src/app/services/upload.service';
 })
 export class FindJobComponent {
   // Existing properties and methods
-  allJobs: any[] = [];
-  displayedColumns: string[] = ['job_name', 'score'];
+  matchedJobs: any[] = [];
+  displayedColumns: string[] = ['job_name', 'score', 'reasoning'];
   loadingJobs: boolean = false;
   errorLoadingJobs: string = '';
   currentCvId: string = '';
@@ -62,7 +62,7 @@ export class FindJobComponent {
   onGetMatchedJobs(): void {
     this.loadingJobs = true;
     this.errorLoadingJobs = '';
-    this.allJobs = [];
+    this.matchedJobs = [];
 
     const requestData = {
       CvId: this.currentCvId,
@@ -70,9 +70,9 @@ export class FindJobComponent {
 
     this.matchingService.getMatchedJobs(requestData).subscribe(
       (jobs) => {
-        this.allJobs = jobs;
+        this.matchedJobs = jobs;
         this.loadingJobs = false;
-        console.log('Matching jobs:', this.allJobs);
+        this.fetchReasoningForCandidates(jobs);
       },
       (error) => {
         console.error('Error fetching matching jobs:', error);
@@ -80,6 +80,32 @@ export class FindJobComponent {
         this.loadingJobs = false;
       }
     );
+  }
+
+  private fetchReasoningForCandidates(jobs: any[]): void {
+    // Map each candidate to a reasoning request
+    const reasoningRequests = jobs.map(candidate => {
+        // Create the requestData object for each candidate
+        const requestData = {
+            reasoning_1: candidate.general_reasoning,
+            reasoning_2: candidate.tehnical_reasoning,
+            reasoning_3: candidate.domain_reasoning,
+        };
+
+        // Return the observable from getFinalReasoning for this candidate
+        return this.matchingService.getFinalReasoning(requestData).toPromise();
+    });
+
+    // Wait for all requests to complete
+    Promise.all(reasoningRequests).then((responses) => {
+        this.matchedJobs = jobs.map((job, index) => ({
+            ...job,
+            reasoning: responses[index].reasoning
+        }));
+    }).catch(error => {
+        console.error('Error fetching reasoning:', error);
+        this.errorLoadingJobs = 'An error occurred while fetching candidate reasoning.';
+    });
   }
 
   public receiveFile(file: File) {
