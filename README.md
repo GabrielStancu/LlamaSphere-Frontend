@@ -99,7 +99,7 @@ devmatch-frontend/
 
 ### Developer Flow
 
-1. **Upload CV**: Developers can upload their CV in `.txt` format.
+1. **Upload CV**: Developers can upload their CV in `.docx` format.
 2. **Get Best Match**: The system returns the best-matching job description based on the CV content and displays a score for alignment.
 
 ### Recruiter Flow
