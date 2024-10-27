@@ -47,12 +47,14 @@ export class FileUploadComponent {
         const progressInterval = setInterval(() => {
           if (this.files[index].progress === 100) {
             clearInterval(progressInterval);
-            this.fileEmitter.emit(this.files[index]);
             this.uploadFilesSimulator(index + 1);
           } else {
-            this.files[index].progress += 5;
+            if (this.files[index].progress === 2) {
+              this.fileEmitter.emit(this.files[index]);
+            }
+            this.files[index].progress += 2;
           }
-        }, 200);
+        }, 100);
       }
     }, 1000);
   }
