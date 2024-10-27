@@ -17,24 +17,38 @@ export class MatchingService {
     // const url = `${this.apiUrl}/developer/all-jobs`;
     // return this.http.get<any[]>(url);
     // Hardcoded job data
+    // const jobs = [
+    //   {
+    //     id: '1',
+    //     title: 'Senior Software Engineer',
+    //     score: 95,
+    //     explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
+    //   },
+    //   {
+    //     id: '2',
+    //     title: 'Full Stack Developer',
+    //     score: 88,
+    //     explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
+    //   },
+    //   {
+    //     id: '3',
+    //     title: 'Backend Developer',
+    //     score: 80,
+    //     explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
+    //   }
+    // ];
     const jobs = [
       {
-        id: '1',
-        title: 'Senior Software Engineer',
-        score: 95,
-        explanation: 'Matched skills: Java, Angular; Industry experience: Banking'
+        id: '11a1349b-6096-4aac-ae9b-11f198e8b43b',
+        title: 'Junior Backend Developer',
       },
       {
-        id: '2',
-        title: 'Full Stack Developer',
-        score: 88,
-        explanation: 'Matched skills: Node.js, React; Industry experience: Healthcare'
+        id: '518da9ea-2fe2-4641-be17-115e29d8474f',
+        title: 'Senior Project Manager',
       },
       {
-        id: '3',
-        title: 'Backend Developer',
-        score: 80,
-        explanation: 'Matched skills: Python, Django; Industry experience: E-commerce'
+        id: '6213eef2-0a9a-4072-816a-8071c5eae82f',
+        title: 'Machine Learning Engineer',
       }
     ];
 
